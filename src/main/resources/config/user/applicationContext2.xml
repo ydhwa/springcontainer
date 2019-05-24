@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 빈 설정의 가장 기본적인 모양 -->
+	<bean class="com.cafe24.springcontainer.user.User1"></bean>
+
+	<!-- 특별한 설정을 지정하지 않으면, 기본 생성자로 생성된다. -->
+	<bean id="usr" name="user"
+		class="com.cafe24.springcontainer.user.User" />
+	<bean class="com.cafe24.springcontainer.user.User"></bean>
+
+	<!--
+	Q. 빈 설정은 언제 써야할까?
+	A. 어떤 서비스를 만들었을 때 라이브러리를 서비스에 주입시켜야 하지만
+	패키지를 지정할 때 난감한 경우가 있다.
+	이런 경우 빈 설정으로 수동설정하고, 만들어진 빈 객체를 주입시키도록 한다.
+	 -->
+	<bean id="usr2" class="com.cafe24.springcontainer.user.User">
+		<constructor-arg value="동화" />
+		<property name="friends">
+			<!-- 
+			빈 설정을 위한 리스트를 여기서 설정한다.
+			리스트는 외부에서 만들어서 여기에 주입된다. 
+		 	 -->
+			<list>
+				<value>마이콜</value>
+				<value>도우넛</value>
+				<value>또치</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usr3" class="com.cafe24.springcontainer.user.User">
+		<!-- 
+		생성자 파라미터 지정 순서와 다르면 에러가 발생하는데,
+		index를 지정해주면 된다.
+		namespace를 사용하는 방법도 있다고 한다(c_name="..." 향후 실습 내용)
+		 -->
+		<constructor-arg value="동" index="1" />
+		<constructor-arg value="1" index="0" />
+		<!-- 
+		외부에서 접근하는 것이 아니라 무조건 이 객체를 통해서만 접근할 수 있도록 하려면
+		이 안에 빈설정을 해버린다.
+		MyBatis's Datasource 
+		 -->
+		<property name="friend">
+			<bean name="friend" class="com.cafe24.springcontainer.user.Friend">
+				<property name="name" value="동 친구" />
+			</bean>
+		</property>
+	</bean>
+
+	
+	<bean id="friend" class="com.cafe24.springcontainer.user.Friend">
+		<property name="name" value="donghwa" />
+	</bean>
+	
+	<bean id="usr4" class="com.cafe24.springcontainer.user.User">
+		<!--
+		기본 생성자로 생성 후 property를 사용하여 파라미터 지정 
+		 -->
+		 <property name="no" value="2" />
+		 <property name="name" value="__양동화__" />
+		 <!-- 참조를 갖고 있는 경우 ref를 사용하여 지정 -->
+		 <property name="friend" ref="friend" />
+	</bean>
+</beans>
