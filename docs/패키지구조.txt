@@ -6,7 +6,7 @@ com.cafe24.springcontainer.soundsystem
 com.cafe24.springcontainer.videosystem
    |- DigitalVideoDisc
    |- Avengers
-   |- DVDPalyer
+   |- DVDPlayer
    |- BlankDisc
    |- DVDPack	
 

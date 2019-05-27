@@ -15,9 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import config.videosystem.DVDPlayerConfig;
 
 /**
- * Configuration - Java Config (Explicit)
- * Component Scanning(@Component, @Named, @Autowired(Spring에서 지원), @Inject(Java표준))
- *
+ * Explicit Configuration - Java Config
+ * @Bean
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
