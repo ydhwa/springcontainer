@@ -32,6 +32,7 @@ public class CDPlayer {
 	/* 
 	 * Test 코드의 cd와 CDPlayer의 cd는 전혀 다른 객체이기 때문에
 	 * 각각에서 Qualifier를 지정해줘야 한다.
+	 * 파라미터에도 Qualifier를 지정할 수 있다.
 	 */
 //	@Autowired
 	public void insertCompactDisc(@Qualifier("sarangbi") CompactDisc cd) {
