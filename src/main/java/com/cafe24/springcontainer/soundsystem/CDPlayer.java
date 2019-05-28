@@ -30,9 +30,8 @@ public class CDPlayer {
 	
 	// 와이어링 04
 	/* 
-	 * Autowired 대상을 여러 개를 만들고 그 중 하나를 선택하려고 할 때
-	 * (여기서는 CompactDisc 인터페이스를 구현하는 Sarangbi와 MyStyle 중 Sarangbi)
-	 * 속성을 부여해주는 메소드의 파라미터에도 @Qualifier를 명시해주어야 한다.
+	 * Test 코드의 cd와 CDPlayer의 cd는 전혀 다른 객체이기 때문에
+	 * 각각에서 Qualifier를 지정해줘야 한다.
 	 */
 //	@Autowired
 	public void insertCompactDisc(@Qualifier("sarangbi") CompactDisc cd) {
